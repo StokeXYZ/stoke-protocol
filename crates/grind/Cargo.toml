@@ -1,0 +1,14 @@
+[package]
+name = "meridian-grind"
+version = "0.1.0"
+description = "Grinds a program keypair whose address encodes Meridian hook permissions in its low 14 bits (like mining a v4 hook address)."
+edition.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "meridian-grind"
+path = "src/main.rs"
+
+[dependencies]
+solana-keypair = "3.1.2"
+solana-signer = "3"

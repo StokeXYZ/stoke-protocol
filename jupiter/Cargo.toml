@@ -1,0 +1,28 @@
+[package]
+name = "stoke-amm"
+version = "0.1.0"
+description = "Stoke for Jupiter: the jupiter-amm-interface `Amm` for Stoke's coins, quoting with the programs' own code."
+edition = "2021"
+license = "Apache-2.0"
+rust-version = "1.89.0"
+publish = false
+
+# Its own workspace, beside the programs': Jupiter's test kit pins LiteSVM 0.14 and the Solana
+# crates that go with it (see "Dependency notes" in the kit's README), and Cargo.lock here holds
+# those versions. Don't `cargo update` it.
+[workspace]
+
+[lib]
+name = "stoke_amm"
+
+[dependencies]
+jupiter-amm-interface = { git = "https://github.com/jup-ag/jupiter-amm-interface", rev = "70f56e0495b7c818e4c38e37b2007656892ca2a1" }
+stoke-quote = { path = "../crates/stoke-quote" }
+rust_decimal = "1.36"
+solana-account = "4"
+solana-instruction = "3"
+solana-pubkey = "4"
+
+[dev-dependencies]
+serde_json = "1"
+jupiter-amm-test-kit = { git = "https://github.com/jup-ag/jupiter-amm-interface", rev = "70f56e0495b7c818e4c38e37b2007656892ca2a1" }

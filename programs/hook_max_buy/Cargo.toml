@@ -1,0 +1,24 @@
+[package]
+name = "stoke_hook_max_buy"
+version = "0.1.0"
+description = "Stoke coin hook: no single buy above a set size for a coin's first minutes."
+edition.workspace = true
+rust-version.workspace = true
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "stoke_hook_max_buy"
+
+[features]
+# The program's own panic handler keeps formatting code out of the binary.
+default = ["custom-panic"]
+no-entrypoint = []
+custom-heap = []
+custom-panic = []
+
+[dependencies]
+anchor-lang = { workspace = true }
+meridian-core = { workspace = true }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }

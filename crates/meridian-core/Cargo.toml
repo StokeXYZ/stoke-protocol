@@ -1,0 +1,20 @@
+[package]
+name = "meridian-core"
+version = "0.1.0"
+description = "Meridian: Uniswap v4-style hooks on Solana. Math, account layouts and the hook interface shared by the PoolManager and hook programs."
+edition.workspace = true
+rust-version.workspace = true
+
+[lib]
+name = "meridian_core"
+
+[features]
+idl-build = ["anchor-lang/idl-build"]
+
+[dependencies]
+anchor-lang = { workspace = true }
+uint = { workspace = true }
+bytemuck = { workspace = true }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }

@@ -1,0 +1,21 @@
+[package]
+name = "stoke-quote"
+version = "0.1.0"
+description = "What a trade of a Stoke coin returns, computed off-chain from its accounts with the programs' own code: the curve, the pool engine, fee zones and Stoke's hooks."
+edition.workspace = true
+license = "Apache-2.0"
+rust-version.workspace = true
+
+[lib]
+name = "stoke_quote"
+
+[dependencies]
+anchor-lang = { workspace = true }
+meridian-core = { workspace = true }
+meridian_pool_manager = { path = "../../programs/pool_manager", features = ["cpi"] }
+meridian_launch = { path = "../../programs/launch_hook", features = ["cpi"] }
+stoke_hook_launch_tax = { path = "../../programs/hook_launch_tax", default-features = false, features = ["no-entrypoint"] }
+stoke_hook_max_buy = { path = "../../programs/hook_max_buy", default-features = false, features = ["no-entrypoint"] }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }

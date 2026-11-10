@@ -1,0 +1,44 @@
+[package]
+name = "meridian_pool_manager"
+version = "0.1.0"
+description = "Meridian PoolManager: a concentrated-liquidity singleton with Uniswap v4's full hook model, on Solana."
+edition.workspace = true
+rust-version.workspace = true
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "meridian_pool_manager"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build", "meridian-core/idl-build"]
+anchor-debug = []
+custom-heap = []
+custom-panic = []
+
+[dependencies]
+anchor-lang = { workspace = true }
+anchor-spl = { workspace = true }
+meridian-core = { workspace = true }
+bytemuck = { workspace = true }
+
+[dev-dependencies]
+litesvm = "0.18.2"
+solana-message = "4"
+solana-transaction = "4"
+solana-signer = "3"
+solana-keypair = "3.1.2"
+solana-account = "4"
+rand = "0.8"
+meridian_mock_hook = { path = "../mock_hook", features = ["no-entrypoint"] }
+borsh = "1"
+meridian_launch = { path = "../launch_hook", features = ["no-entrypoint"] }
+stoke_hook_launch_tax = { path = "../hook_launch_tax", features = ["no-entrypoint"] }
+stoke_hook_max_buy = { path = "../hook_max_buy", features = ["no-entrypoint"] }
+stoke-quote = { path = "../../crates/stoke-quote" }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }

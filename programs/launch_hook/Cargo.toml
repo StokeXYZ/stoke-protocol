@@ -1,0 +1,29 @@
+[package]
+name = "meridian_launch"
+version = "0.1.0"
+description = "Meridian Launch: a pump-style bonding curve implemented as a v4-style hook (beforeSwapReturnDelta), graduating into its own pool inside the swap that completes it."
+edition.workspace = true
+rust-version.workspace = true
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "meridian_launch"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build", "meridian-core/idl-build"]
+anchor-debug = []
+custom-heap = []
+custom-panic = []
+
+[dependencies]
+anchor-lang = { workspace = true }
+anchor-spl = { workspace = true }
+meridian-core = { workspace = true }
+meridian_pool_manager = { path = "../pool_manager", features = ["cpi"] }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }

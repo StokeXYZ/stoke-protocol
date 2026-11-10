@@ -1,0 +1,24 @@
+[package]
+name = "meridian_mock_hook"
+version = "0.1.0"
+description = "Test hook: configurable returns, effects, payments and misbehaviour; logs every callback. Works at any program id, so tests deploy it at addresses with any permission bits."
+edition.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "meridian_mock_hook"
+
+[features]
+no-entrypoint = []
+custom-heap = []
+custom-panic = []
+
+[dependencies]
+anchor-lang = { workspace = true }
+anchor-spl = { workspace = true }
+meridian-core = { workspace = true }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }
